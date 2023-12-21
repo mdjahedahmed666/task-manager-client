@@ -28,7 +28,7 @@ const Login = () => {
           icon: "Success",
           confirmButtonText: "ok",
         }),
-          navigate(location.state ? location.state : "/");
+          navigate(location.state ? location.state : "/dashboard");
       })
       .catch((error) => {
         console.error(error);
@@ -39,7 +39,7 @@ const Login = () => {
   const handleGoogleLogIn = () => {
     logInWithGoogle()
     .then(()=>{
-      navigate(location.state ? location.state : "/");
+      navigate(location.state ? location.state : "/dashboard");
     })
   };
   return (

@@ -25,27 +25,27 @@ const router = createBrowserRouter([
        },
       ]
     },
-    // {
-    //   path: 'dashboard',
-    //   element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-    //   children: [
-    //     // normal user routes
-    //     {
-    //       path: 'myProfile',
-    //       element: <MyProfile/>
-    //     },
-    //     {
-    //       path: 'addProduct',
-    //       element: <AddProduct/>
-    //     },
-    //     {
-    //       path: 'myProducts',
-    //       element: <MyProducts/>
-    //     },
+    {
+      path: 'dashboard',
+      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+      children: [
+        // normal user routes
+        {
+          path: 'myProfile',
+          element: <MyProfile/>
+        },
+        {
+          path: 'addProduct',
+          element: <AddProduct/>
+        },
+        {
+          path: 'myProducts',
+          element: <MyProducts/>
+        },
 
 
-    //   ]
-    // }
+      ]
+    }
   ]);
 
   export default router;
