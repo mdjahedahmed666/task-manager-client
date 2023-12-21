@@ -1,7 +1,54 @@
 
-import { NavLink } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Navbar = () => {
+  const [logedUser, setLogedUser] = useState([]);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user && user?.email) {
+      fetch('https://techhub-server-n5dugvzfl-mdjahedahmed12-gmailcom.vercel.app/users')
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          const matchedUser = data.find(
+            (userData) => userData.email === user.email
+          );
+          console.log(matchedUser);
+          if (matchedUser) {
+            setLogedUser(matchedUser);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    } else {
+      // Set userData to a default value or an empty object
+      setLogedUser([]);
+    }
+  }, [user]);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(
+        Swal.fire({
+          title: "Log Out",
+          text: "Successfully logged out",
+          icon: "Success",
+          confirmButtonText: "ok",
+        }),
+        navigate("/")
+      )
+      .catch((error) => {
+        console.error("Logout failed", error);
+      });
+  };
+
+
     const navLinks = (
         <>
           <li className="text-lg">
@@ -33,9 +80,34 @@ const Navbar = () => {
     </ul>
   </div>
   
-  {/* <div className="navbar-end">
-    <a className="btn">Button</a>
-  </div> */}
+  <div className="navbar-end">
+        <div className="dropdown dropdown-end">
+          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 rounded-full">
+              <img
+                alt="Tailwind CSS Navbar component"
+                src={logedUser.photo}
+              />
+            </div>
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <p className="justify-between">{logedUser.name}</p>
+            </li>
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li>
+              <Link onClick={handleLogOut} to="/login">
+                Logout
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
 </div>
   )
 }
