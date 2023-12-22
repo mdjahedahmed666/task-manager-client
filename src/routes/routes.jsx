@@ -4,6 +4,12 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import PageNotFound from "../pages/PageNotFound/PageNotFound";
 import Home from "../pages/Home/Home";
+import PrivateRoute from "./PriviteRoute";
+import Dashboard from "../layouts/Dashboard";
+import MyProfile from "../pages/MyProfile/MyProfile";
+import MyWork from "../pages/MyWork/MyWork";
+
+
 
 const router = createBrowserRouter([
     {
@@ -35,13 +41,13 @@ const router = createBrowserRouter([
           element: <MyProfile/>
         },
         {
-          path: 'addProduct',
-          element: <AddProduct/>
+          path: 'myWork',
+          element: <MyWork/>
         },
-        {
-          path: 'myProducts',
-          element: <MyProducts/>
-        },
+        // {
+        //   path: 'myProducts',
+        //   element: <MyProducts/>
+        // },
 
 
       ]
