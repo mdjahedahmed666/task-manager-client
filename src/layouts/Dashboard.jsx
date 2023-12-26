@@ -20,9 +20,6 @@ const Dashboard = () => {
             <li>
               <NavLink to="/dashboard/myWork">My Work</NavLink>
             </li>
-            <li>
-              <NavLink to="/dashboard/myProducts">My Products</NavLink>
-            </li>
           </>
         </ul>
       </div>
